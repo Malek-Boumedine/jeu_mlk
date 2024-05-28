@@ -1,0 +1,84 @@
+#!/bin/bash
+
+LEVEL=1
+
+# Fonction pour afficher le niveau actuel et demander à l'utilisateur de résoudre une tâche
+function play_level() {
+    local level=$1
+
+    echo "Niveau $level :"
+
+    case $level in
+        1)
+            echo "Quelle commande est utilisée pour afficher le contenu d'un fichier texte ?"
+            read -p "Votre réponse : " answer
+            if [ "$answer" = "cat" ]; then
+                echo "Correct ! Notez cette lettre : A"
+                return 0
+            else
+                echo "Faux ! Réessayez."
+                return 1
+            fi
+            ;;
+        2)
+            echo "Quelle commande permet de lister les fichiers dans un répertoire ?"
+            read -p "Votre réponse : " answer
+            if [ "$answer" = "ls" ]; then
+                echo "Correct ! Notez cette lettre : A"
+                return 0
+            else
+                echo "Faux ! Réessayez."
+                return 1
+            fi
+            ;;
+        3)
+            echo "Quelle commande permet de changer les permissions d'un fichier ?"
+            read -p "Votre réponse : " answer
+            if [ "$answer" = "chmod" ]; then
+                echo "Correct ! Notez cette lettre : I"
+                return 0
+            else
+                echo "Faux ! Réessayez."
+                return 1
+            fi
+            ;;
+        4)
+            echo "Quelle commande permet de trouver des fichiers par nom ?"
+            read -p "Votre réponse : " answer
+            if [ "$answer" = "find" ]; then
+                echo "Correct ! Notez cette lettre : N"
+                return 0
+            else
+                echo "Faux ! Réessayez."
+                return 1
+            fi
+            ;;
+        5)
+            echo "Quelle commande permet d'afficher les premières lignes d'un fichier ?"
+            read -p "Votre réponse : " answer
+            if [ "$answer" = "head" ]; then
+                echo "Correct ! Notez cette lettre : L"
+                return 0
+            else
+                echo "Faux ! Réessayez."
+                return 1
+            fi
+            ;;
+        *)
+            echo "Niveau inconnu !"
+            return 1
+            ;;
+    esac
+}
+
+# Boucle principale du jeu
+while [ $LEVEL -le 5 ]; do
+    if play_level $LEVEL; then
+        LEVEL=$((LEVEL + 1))
+    else
+        echo "Essayez encore."
+    fi
+done
+
+echo "Félicitations ! Vous avez terminé le jeu. Vous devriez avoir noté les lettres révélées pour former le mot magique."
+
